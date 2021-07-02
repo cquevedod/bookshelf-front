@@ -23,9 +23,9 @@ function App() {
     }
   }, [consult] );
 
-  const message = process.env.NODE_ENV === 'development'
+  const message = process.env.REACT_APP_ENV === 'development'
     ? <p>Develop </p>
-    : process.env.NODE_ENV === 'production'
+    : process.env.REACT_APP_ENV === 'production'
      ? <p>Production</p>
      : <p>Test</p>
 
