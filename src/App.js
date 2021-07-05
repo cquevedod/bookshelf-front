@@ -27,7 +27,7 @@ function App() {
     ? <p>Develop </p>
     : process.env.REACT_APP_ENV === 'production'
       ? <p>Production</p>
-      : process.env.REACT_APP_ENV === 'pr_preview'
+      : process.env.REACT_APP_ENV === 'preview'
         ? <p>PR Preview</p>
         : <p>Localhost</p>
 
