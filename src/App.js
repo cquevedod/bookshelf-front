@@ -7,8 +7,8 @@ function App() {
   const [books, setBooks] = useState([]);
   const [consult, setConsult] = useState(true);
 
-  useEffect( () => {
-    if(consult) {
+  useEffect(() => {
+    if (consult) {
       const consultarAPI = () => {
         clienteAxios.get('/api/books')
           .then(respuesta => {
@@ -21,18 +21,18 @@ function App() {
       }
       consultarAPI();
     }
-  }, [consult] );
+  }, [consult]);
 
   const message = process.env.REACT_APP_ENV === 'development'
     ? <p>Develop </p>
     : process.env.REACT_APP_ENV === 'production'
-     ? <p>Production</p>
-     : <p>Test Sin miedo al exito!!</p>
+      ? <p>Production</p>
+      : <p>Localhost</p>
 
   return (
     <div className="App">
       <header className="App-header">
-        {message}
+        <p>Environment: {message}</p>
         <p>{JSON.stringify(books)}</p>
       </header>
     </div>
