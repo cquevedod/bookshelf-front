@@ -1,16 +1,16 @@
 
 import { useEffect, useState } from 'react';
 import clienteAxios from './config/axios';
-import './App.css';
+import './App.scss';
 
 function App() {
   const [books, setBooks] = useState([]);
   const [consult, setConsult] = useState(true);
 
-  useEffect( () => {
-    if(consult) {
+  useEffect(() => {
+    if (consult) {
       const consultarAPI = () => {
-        clienteAxios.get('/api/books')
+        clienteAxios.get('/books')
           .then(respuesta => {
             setBooks(respuesta.data)
             setConsult(false);
@@ -21,19 +21,21 @@ function App() {
       }
       consultarAPI();
     }
-  }, [consult] );
+  }, [consult]);
 
   const message = process.env.REACT_APP_ENV === 'development'
     ? <p>Develop </p>
     : process.env.REACT_APP_ENV === 'production'
-     ? <p>Production</p>
-     : <p>Test Sin miedo al exito!!</p>
+      ? <p>Production</p>
+      : process.env.REACT_APP_ENV === 'preview'
+        ? <p>PR Preview</p>
+        : <p>Localhost</p>
 
   return (
     <div className="App">
       <header className="App-header">
-        {message}
-        <p>{JSON.stringify(books)}</p>
+        <p className="environment">Environment: <span>{message}</span></p>
+        <p className="books">{JSON.stringify(books)}</p>
       </header>
     </div>
   );
