@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import clienteAxios from './config/axios';
-import './App.css';
+import './App.scss';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     if (consult) {
       const consultarAPI = () => {
-        clienteAxios.get('/api/books')
+        clienteAxios.get('/books')
           .then(respuesta => {
             setBooks(respuesta.data)
             setConsult(false);
@@ -27,13 +27,15 @@ function App() {
     ? <p>Develop </p>
     : process.env.REACT_APP_ENV === 'production'
       ? <p>Production</p>
-      : <p>Localhost</p>
+      : process.env.REACT_APP_ENV === 'pr_preview'
+        ? <p>PR Preview</p>
+        : <p>Localhost</p>
 
   return (
     <div className="App">
       <header className="App-header">
-        <p>Environment: {message}</p>
-        <p>{JSON.stringify(books)}</p>
+        <p className="environment">Environment: <span>{message}</span></p>
+        <p className="books">{JSON.stringify(books)}</p>
       </header>
     </div>
   );
