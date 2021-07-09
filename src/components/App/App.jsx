@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
-import clienteAxios from './config/axios';
+import clienteAxios from '../../config/axios';
+import logo from '../../assets/images/logo.png'
 import './App.scss';
 
 function App() {
@@ -33,10 +34,13 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="App-content">
+        <div>
+          <img href="#" src={logo} alt="logo" />
+        </div>
         <p className="environment">Environment: <span>{message}</span></p>
         <p className="books">{JSON.stringify(books)}</p>
-      </header>
+      </div>
     </div>
   );
 }
