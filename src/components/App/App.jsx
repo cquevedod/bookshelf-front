@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
-import clienteAxios from './config/axios';
+import axiosClient from '../../config/axios';
+import logo from '../../assets/images/logo.png'
 import './App.scss';
 
 function App() {
@@ -9,21 +10,21 @@ function App() {
 
   useEffect(() => {
     if (consult) {
-      const consultarAPI = () => {
-        clienteAxios.get('/books')
-          .then(respuesta => {
-            setBooks(respuesta.data)
+      const fetchBooks = () => {
+        axiosClient.get('/books')
+          .then(response => {
+            setBooks(response.data)
             setConsult(false);
           })
           .catch(error => {
             console.log(error)
           })
       }
-      consultarAPI();
+      fetchBooks();
     }
   }, [consult]);
 
-  const message = process.env.REACT_APP_ENV === 'development'
+  const environment = process.env.REACT_APP_ENV === 'development'
     ? <p>Develop </p>
     : process.env.REACT_APP_ENV === 'production'
       ? <p>Production</p>
@@ -32,11 +33,14 @@ function App() {
         : <p>Localhost</p>
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p className="environment">Environment: <span>{message}</span></p>
+    <div className="app">
+      <div className="app-content">
+        <div className="logo-container">
+          <img href="#" className="logo" src={logo} alt="logo" />
+        </div>
+        <p className="environment">Environment: <span>{environment}</span></p>
         <p className="books">{JSON.stringify(books)}</p>
-      </header>
+      </div>
     </div>
   );
 }

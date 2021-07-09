@@ -1,0 +1,45 @@
+/**
+CSS blocks order
+*
+1. Position (static, absolute, relative, fixed)
+2. Box model (margin, border, padding, content)
+3. Typography (fonts, sizes)
+4. Visual (e.g box-shadow, border-radius, gradient)
+5. Others (CSS rules)
+*/
+
+@import '../../assets/styles/variables';
+
+.app {
+  text-align: center;
+
+  .app-content {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: $pluto_sans_cond_medium;
+    font-size: calc(10px + 2vmin);
+    background-color: $landing_bg_color;
+    color: white;
+
+    .logo-container {
+      flex-direction: row;
+      width: 12.6rem;
+      align-items: center;
+
+      .logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+    }
+    .environment {
+      span {
+        color: $env_title_color;
+      }
+    }
+    
+  }
+}
