@@ -19,9 +19,8 @@ CSS blocks order
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    font-family: $pluto_sans_cond_medium;
+    font-family: $PlutoSansCondMedium;
     font-size: calc(10px + 2vmin);
-    background-color: $landing_bg_color;
     color: white;
 
     .logo-container {
@@ -35,11 +34,7 @@ CSS blocks order
         border-radius: 50%;
       }
     }
-    .environment {
-      span {
-        color: $env_title_color;
-      }
-    }
+
     
   }
 }
