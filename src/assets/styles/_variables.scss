@@ -1,5 +1,15 @@
 // Variables to be used across all the components in the App
 
-$landing_bg_color: #282c34;
-$env_title_color: #34da17;
-$pluto_sans_cond_medium: PlutoSansCondMedium
+$primary: #6EC1E4;
+$secondary: #999;
+$primaryButtonGradient: linear-gradient(to right, #5cb3d8, #6EC1E4, #44a7d1);
+$disabledGradient: linear-gradient(to right, #999, #999, #999);
+$title: #000;
+$formInputBorder: #d9d9d9;
+$buttonTextColor: #FCF8F3;
+$sidebarColor: #231F20;
+$secondTextColor: #231F20;
+$linkColor: #0073b1;
+$PlutoSansCondMedium: PlutoSansCondMedium;
+$PlutoSansMedium: PlutoSansMedium;
+$PlutoSansCondLight: PlutoSansCondLight;
