@@ -1,54 +1,82 @@
-import React, { lazy } from 'react'
-import { Formik, Form } from 'formik'
-const Input = lazy(() => import('../Input/SigninInput/Input'))
-const Button = lazy(() => import('../Button/Button'))
-
+import React from "react";
+import { Formik, Form } from "formik";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import * as Yup from "yup";
+import Input from "../Input/SigninInput/Input";
+import Button from "../Button/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./CustomForm.scss";
 
 function CustomForm({ initialValues, inputProps, buttonProps }) {
+  const { confirmPassword } = initialValues;
 
-    function isValidEmail(email) {
-        return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
-    }
+  let SignupSchema;
+  if (confirmPassword === "none") {
+    SignupSchema = Yup.object().shape({
+      password: Yup.string()
+        .min(6, "The password must be at least 6 characters")
+        .required("Required"),
+      email: Yup.string().email("Invalid email").required("Required"),
+    });
+  } else {
+    SignupSchema = Yup.object().shape({
+      password: Yup.string()
+        .min(6, "The password must be at least 6 characters")
+        .required("Required"),
+      confirmPassword: Yup.string()
+        .min(6, "The password must be at least 6 characters")
+        .required("Required")
+        .oneOf([Yup.ref("password"), null], "Passwords must match"),
+      email: Yup.string().email("Invalid email").required("Required"),
+    });
+  }
 
-    //Just a temporal validation
-    function checkForm({ email, password, confirmPassword }) {
-        let isValid = false
-        if (email.length > 0 && password.length > 0 && confirmPassword.length > 0) {
-            if ((password === confirmPassword) && isValidEmail(email)) {
-                isValid = true
-            }
-        }
-        return isValid
-    }
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={SignupSchema}
+      onSubmit={async (values) => {
+        await sleep(1000);
+        alert(JSON.stringify(values.email, null, 2));
+      }}
+    >
+      {({ isSubmitting, values, isValid, dirty, errors, touched }) => (
+        <Form className="form-component">
+          {inputProps.map((el, index) => (
+            <>
+              <Input
+                name={el.name}
+                type={el.inputType}
+                className={el.className}
+                placeholder={el.placeholder}
+                icon={el.icon}
+                key={index}
+              />
+              {errors[el.name] && touched[el.name] ? (
+                <div className="errors">
+                  <FontAwesomeIcon
+                    className="icon-error"
+                    icon={faExclamationCircle}
+                  />
+                  {errors[el.name]}
+                </div>
+              ) : null}
+            </>
+          ))}
 
-    return (
-        <Formik
-            initialValues={initialValues}
-            onSubmit={async values => {
-                await sleep(1000);
-                alert(JSON.stringify(values.email, null, 2));
-            }}
-        >
-            {({ isSubmitting, values, isValid, dirty }) => (
+          <Button
+            disabled={!isValid}
+            className={buttonProps.className}
+            type={buttonProps.type}
+          >
+            {buttonProps.label}
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  );
+}
 
-                <Form className="form-component">
-                    {inputProps.map((el, index) => (
-                        <Input
-                            name={el.name}
-                            type={el.inputType}
-                            className={el.className}
-                            placeholder={el.placeholder}
-                            icon={el.icon}
-                            key={index}
-                        />
-                    ))}
-                    <Button disabled={!(isValid && dirty && checkForm(values)) || isSubmitting} className={buttonProps.className} type={buttonProps.type}>{buttonProps.label}</Button>
-                </Form>
-            )}
-        </Formik>
-    )
-};
-
-export default CustomForm
+export default CustomForm;

@@ -1,0 +1,67 @@
+@import "assets/styles/variables";
+@import "assets/styles/media-queries";
+
+%align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  @extend %align-center;
+  gap: 10rem;
+  padding: 0.5rem calc((100vw - 1200px) / 2);
+  font-family: $PlutoSansCondMedium, "sans-serif";
+  @include tablet {
+    grid-template-columns: 1fr;
+  }
+  @include resize-container {
+    gap: 5rem;
+  }
+
+  &__left-img {
+    margin-right: 70px;
+    @include tablet {
+      display: none;
+    }
+    .bookshelves-img {
+      width: 90%;
+      min-width: 200px;
+      max-width: 380px;
+    }
+  }
+  &__signin {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 40%;
+    min-width: 250px;
+    max-width: 340px;
+    margin-right: 20px;
+    @include tablet {
+      justify-content: center;
+      margin-right: 0;
+    }
+    &--top-wrapper {
+      @include mobile {
+        margin-bottom: 20px;
+      }
+    }
+
+    &--avatar {
+      height: 100px;
+    }
+    &--title {
+      margin: 15px 0 0 0;
+      font-size: 2.5rem;
+      color: $title;
+      text-transform: uppercase;
+      @include resize-font {
+        margin: 5px 0;
+        font-size: 2rem;
+      }
+    }
+  }
+}
