@@ -1,0 +1,14 @@
+@import "assets/styles/variables";
+@import "assets/styles/media-queries";
+
+.container__left-img {
+  margin-right: 70px;
+  @include tablet {
+    display: none;
+  }
+  .bookshelves-img {
+    width: 90%;
+    min-width: 200px;
+    max-width: 380px;
+  }
+}
