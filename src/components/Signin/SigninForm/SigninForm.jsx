@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
+import { signin } from '../../../services/auth';
+import { useHistory } from "react-router-dom"
 import * as Yup from "yup";
 import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button";
 
-function SigninForm({ initialValues, inputProps, buttonProps }) {
+function SigninForm({ initialValues, inputProps, buttonProps, request }) {
+
+  const [error, setError] = useState("")
+  const history = useHistory()
   const { confirmPassword } = initialValues;
 
   let SignupSchema;
@@ -36,8 +41,18 @@ function SigninForm({ initialValues, inputProps, buttonProps }) {
       validateOnBlur={false}
       validateOnChange={false}
       onSubmit={async (values) => {
-        await sleep(1000);
-        alert(JSON.stringify(values.email, null, 2));
+        // await sleep(1000);
+        // alert(JSON.stringify(values.email, null, 2));
+        if (request === 'signin') {
+          signin(values)
+            .then(response => {
+              localStorage.setItem('userAuthenticated', JSON.stringify(response.data));
+            })
+            .catch(error => {
+              setError(error.response.data.message); //error could be shown with swal
+            })
+          history.push("/");
+        }
       }}
     >
       {({
@@ -47,7 +62,8 @@ function SigninForm({ initialValues, inputProps, buttonProps }) {
         dirty,
         errors,
         touched,
-        setErrors
+        setErrors,
+        handleChange
       }) => (
         <Form className="form-component">
           {inputProps.map(({ name, inputType, styleName, placeholder, icon }, index) => (
