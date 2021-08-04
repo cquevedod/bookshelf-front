@@ -1,9 +1,8 @@
-import { lazy } from "react";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
-import { Link, useHistory } from "react-router-dom";
-import AsideBookShelf from "components/Signin/AsideBookShelf/AsideBookShelf";
-import FormHeader from "components/Signin/FormHeader/FormHeader";
-import CustomForm from "components/UI/CustomForm/CustomForm";
+import { Link } from "react-router-dom";
+import AsideBackground from "../AsideBackground/AsideBackground";
+import FormHeader from "../FormHeader/FormHeader";
+import SigninForm from "../SigninForm/SigninForm";
 import "../Signin.scss";
 
 export default function Signin() {
@@ -16,14 +15,14 @@ export default function Signin() {
   const inputProps = [
     {
       name: "email",
-      className: "email-container",
+      styleName: "email-container",
       placeholder: "Email",
       inputType: "email",
       icon: faUser,
     },
     {
       name: "password",
-      className: "password-container",
+      styleName: "password-container",
       placeholder: "Password",
       inputType: "password",
       icon: faLock,
@@ -31,7 +30,7 @@ export default function Signin() {
   ];
 
   const buttonProps = {
-    className: "signin-button",
+    styleName: "submit-button",
     type: "submit",
     label: "Sign In",
   };
@@ -39,20 +38,21 @@ export default function Signin() {
   return (
     <>
       <main className="container">
-        <AsideBookShelf />
-        <aside className="container__signin">
+        <AsideBackground />
+        <aside className="container__form-wrapper">
           <FormHeader title="Sign In" />
-          <CustomForm
+          <SigninForm
             inputProps={inputProps}
             buttonProps={buttonProps}
             initialValues={initialValues}
+            request={'signin'}
           />
-          <div className="container__signin--forgot-link">
+          <div className="container__form-wrapper--forgot-link">
             <Link className="link" to="/forgotpassword">
               <strong>Forgot Password?</strong>
             </Link>
           </div>
-          <div className="container__signin--signin-link">
+          <div className="container__form-wrapper--signin-link">
             <strong>Need an account?</strong>
             <Link className="link" to="/signup">
               Sign Up

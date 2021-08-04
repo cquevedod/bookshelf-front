@@ -1,13 +1,13 @@
 import React from "react";
 
-function Button(props) {
+function Button({ disabled, styleName, type, children }) {
   return (
     <button
-      disabled={props.disabled}
-      className={props.className}
-      type={props.type}
+      disabled={disabled}
+      className={styleName}
+      type={type}
     >
-      {props.children}
+      {children}
     </button>
   );
 }

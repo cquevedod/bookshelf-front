@@ -1,9 +1,8 @@
-import { lazy } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
-import AsideBookShelf from "components/Signin/AsideBookShelf/AsideBookShelf";
-import FormHeader from "components/Signin/FormHeader/FormHeader";
-import CustomForm from "components/UI/CustomForm/CustomForm";
+import AsideBackground from "../AsideBackground/AsideBackground";
+import FormHeader from "../FormHeader/FormHeader";
+import SigninForm from "../SigninForm/SigninForm";
 import "../Signin.scss";
 
 export default function Signup() {
@@ -16,21 +15,21 @@ export default function Signup() {
   const inputProps = [
     {
       name: "email",
-      className: "email-container",
+      styleName: "email-container",
       placeholder: "Email",
       inputType: "email",
       icon: faUser,
     },
     {
       name: "password",
-      className: "password-container",
+      styleName: "password-container",
       placeholder: "Password",
       inputType: "password",
       icon: faLock,
     },
     {
       name: "confirmPassword",
-      className: "password-container__confirm",
+      styleName: "password-container__confirm",
       placeholder: "Confirm Password",
       inputType: "password",
       icon: faLock,
@@ -38,7 +37,7 @@ export default function Signup() {
   ];
 
   const buttonProps = {
-    className: "signin-button",
+    styleName: "submit-button",
     type: "submit",
     label: "Sign Up",
   };
@@ -46,15 +45,15 @@ export default function Signup() {
   return (
     <>
       <main className="container">
-        <AsideBookShelf />
-        <aside className="container__signin">
+        <AsideBackground />
+        <aside className="container__form-wrapper">
           <FormHeader title="Welcome" />
-          <CustomForm
+          <SigninForm
             inputProps={inputProps}
             buttonProps={buttonProps}
             initialValues={initialValues}
           />
-          <div className="container__signin--signin-link">
+          <div className="container__form-wrapper--signin-link">
             <strong>Already have an account?</strong>
             <Link className="link" to="/signin">
               Sign In

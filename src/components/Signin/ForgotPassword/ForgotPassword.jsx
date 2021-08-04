@@ -1,9 +1,8 @@
-import { lazy } from "react";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
-import { Link, useHistory } from "react-router-dom";
-import AsideBookShelf from "components/Signin/AsideBookShelf/AsideBookShelf";
-import FormHeader from "components/Signin/FormHeader/FormHeader";
-import CustomForm from "components/UI/CustomForm/CustomForm";
+import { Link } from "react-router-dom";
+import AsideBackground from "../AsideBackground/AsideBackground";
+import FormHeader from "../FormHeader/FormHeader";
+import SigninForm from "../SigninForm/SigninForm";
 import "../Signin.scss";
 
 export default function ForgotPassword() {
@@ -16,21 +15,21 @@ export default function ForgotPassword() {
   const inputProps = [
     {
       name: "email",
-      className: "email-container",
+      styleName: "email-container",
       placeholder: "Email",
       inputType: "email",
       icon: faUser,
     },
     {
       name: "password",
-      className: "password-container",
+      styleName: "password-container",
       placeholder: "Password",
       inputType: "password",
       icon: faLock,
     },
     {
       name: "confirmPassword",
-      className: "password-container__confirm",
+      styleName: "password-container__confirm",
       placeholder: "Confirm Password",
       inputType: "password",
       icon: faLock,
@@ -38,7 +37,7 @@ export default function ForgotPassword() {
   ];
 
   const buttonProps = {
-    className: "signin-button",
+    styleName: "submit-button",
     type: "submit",
     label: "Reset Password",
   };
@@ -46,22 +45,22 @@ export default function ForgotPassword() {
   return (
     <>
       <main className="container">
-        <AsideBookShelf />
-        <aside className="container__signin">
+        <AsideBackground />
+        <aside className="container__form-wrapper">
           <FormHeader title="Reset Password" />
-          <CustomForm
+          <SigninForm
             inputProps={inputProps}
             buttonProps={buttonProps}
             initialValues={initialValues}
           />
 
-          <div className="container__signin--signin-link">
+          <div className="container__form-wrapper--signin-link">
             <strong>Back to</strong>
             <Link className="link" to="/signin">
               Sign in
             </Link>
           </div>
-          <div className="container__signin--signin-link">
+          <div className="container__form-wrapper--signup-link">
             <strong>Need an account</strong>
             <Link className="link" to="/signup">
               Sign up
